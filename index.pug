@@ -1,0 +1,38 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    title Imitation-Hahow
+    link(rel='stylesheet prefetch', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='css/style.css')
+  body
+    .navbar
+      img.info(src='https://hahow.in/assets/images/publication/proposal-flow-tablet.png', alt='')
+    #app
+      .classbox(v-for='cls in classes')
+        .teacher(v-bind:style="'background-image:url('+ cls.owner.profileImageUrl +')'")
+        .top
+          .classpicture(v-bind:style="'background-image:url('+ cls.coverImage.url +')'")
+          .tag 募資中
+          .bookbtn
+            i.fa.fa-bookmark-o
+        .bottom
+          h1.classtitle {{cls.title}}
+          .texts
+            .pricerow
+              .prepice
+                | 預購價
+                span.orange NT${{cls.preOrderedPrice}}
+              .lastday
+                | 剩
+                span.orange
+                  | {{parseInt((new Date(cls.proposalDueTime)-new Date(cls.incubateTime))/1000/60/60/24)}}天
+            .progressbar
+              .valuebar(v-bind:style="'width:'+(cls.numSoldTickets/cls.successCriteria.numSoldTickets)*100+'%'")
+            .nowpople
+              | 已募資
+              span.orange {{cls.numSoldTickets}}/{{cls.successCriteria.numSoldTickets}}人
+          .orangebar
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.js')
+    script(src='js/index.js')
